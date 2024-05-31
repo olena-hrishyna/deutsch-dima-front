@@ -1,0 +1,43 @@
+<main>
+  <h1 class="login__title">Войти</h1>
+  <form [formGroup]="form" novalidate="" (ngSubmit)="onSubmit()">
+    <mat-form-field class="form-field">
+      <mat-label>Ваш логин</mat-label>
+      <input matInput formControlName="login" />
+    </mat-form-field>
+
+    <mat-form-field class="form-field">
+      <mat-label>Пароль</mat-label>
+      <input
+        matInput
+        [type]="isPasswordVisible ? 'text' : 'password'"
+        formControlName="password"
+      />
+      <button
+        mat-icon-button
+        matSuffix
+        (click)="onChangePasswordVisible($event)"
+        [attr.aria-label]="'Hide password'"
+        [attr.aria-pressed]="isPasswordVisible"
+      >
+        <mat-icon>{{
+          isPasswordVisible ? "visibility" : "visibility_off"
+        }}</mat-icon>
+      </button>
+    </mat-form-field>
+
+    <button
+      mat-raised-button
+      color="primary"
+      type="submit"
+      [disabled]="form.invalid || isLoading"
+    >
+      Войти
+    </button>
+  </form>
+  <p>Нет учетной записи?<a routerLink="/auth/registr">Зарегистрироваться</a></p>
+</main>
+
+@if (isLoading) {
+<app-loader></app-loader>
+}

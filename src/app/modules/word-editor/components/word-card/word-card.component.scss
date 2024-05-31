@@ -1,0 +1,85 @@
+@import "../../../../../assets/scss/variables.scss";
+
+button {
+  transform: scale(0.8);
+}
+
+.second {
+  justify-content: space-between;
+}
+
+.link {
+  display: flex;
+  justify-content: space-between;
+  align-items: stretch;
+  min-height: 30px;
+  width: 350px;
+  height: 100%;
+  border: 1px solid $purple-2;
+  border-radius: 5px;
+  padding-left: 10px;
+
+  &:hover {
+    cursor: pointer;
+    background-color: $grey-2;
+  }
+
+  p {
+    margin: 0 !important;
+
+    &.de {
+      color: $purple-2;
+      font-size: 16px;
+      margin-top: 3px !important;
+    }
+
+    &.prefix {
+      position: relative;
+      top: 1px;
+    }
+
+    &.part {
+      border: 1px solid $purple-2;
+      border-radius: 3px;
+      padding: 0 5px;
+      margin-left: 10px !important;
+      height: 20px;
+      font-size: 12px;
+    }
+
+    &.der,
+    &.die,
+    &.das,
+    &.reflexiv {
+      margin-right: 6px !important;
+    }
+
+    &.sein {
+      color: $pink-4;
+      font-weight: 500;
+    }
+
+    &.haben {
+      color: $pink-9;
+      font-weight: 500;
+    }
+  }
+}
+
+.withoutAudio {
+  p {
+    color: $blue-4 !important;
+  }
+}
+
+h4 {
+  color: $yellow-3;
+  margin: 0;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.known {
+  margin-right: 6px;
+  margin-top: 2px;
+}

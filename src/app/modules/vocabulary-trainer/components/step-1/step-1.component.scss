@@ -1,0 +1,138 @@
+@import "../../../../../assets/scss/variables.scss";
+
+:host {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 10vh;
+  min-height: calc(100vh - $footer-height - $header-height);
+}
+
+.counter {
+  position: absolute;
+  top: -54px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 22px;
+  min-width: 22px;
+  padding: 4px;
+  border-radius: 50%;
+  border: 1px solid $blue-2;
+  color: $blue-2;
+
+  @media #{$mobile-media} {
+    top: -64px;
+  }
+}
+
+h2 {
+  text-align: center;
+  font-size: 20px !important;
+  margin: 0;
+
+  &.die,
+  &.das,
+  &.der {
+    margin-right: 6px;
+  }
+
+  @media #{$mobile-media} {
+    font-size: 18px !important;
+    line-height: 20px !important;
+  }
+}
+
+.second {
+  margin-bottom: 10px;
+}
+
+.reflexiv {
+  margin-right: 5px;
+}
+
+.plural {
+  margin-left: 5px;
+}
+
+.delete {
+  position: relative;
+  left: -15px;
+}
+
+.error {
+  position: absolute;
+  right: -16px;
+}
+
+.row {
+  max-width: 740px;
+  flex-wrap: wrap;
+
+  @media #{$mobile-media} {
+    width: auto;
+    max-width: 540px;
+  }
+
+  app-word-option {
+    margin: 10px;
+  }
+
+  &.stretch {
+    align-items: stretch;
+  }
+}
+
+p {
+  margin: 20px;
+
+  &.level {
+    position: relative;
+    font-size: 14px;
+    margin: -20px 0 10px 0;
+    color: $yellow-3;
+    text-align: center;
+    border: 1px solid $yellow-3;
+    border-radius: 50%;
+    height: 26px;
+    width: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: $grey-2;
+  }
+}
+
+app-audio-player {
+  position: relative;
+}
+
+.prefix {
+  margin-top: 2px;
+}
+
+.title {
+  flex-wrap: nowrap;
+  margin-left: 20px;
+}
+
+.column {
+  position: relative;
+}
+
+.example {
+  line-height: 24px;
+  color: $grey-6;
+}
+
+.past {
+  font-size: 17px;
+  color: $yellow-7;
+  margin-bottom: 5px;
+  margin-top: -5px;
+}
+
+.actions {
+  margin: 15px 0 0 35px;
+  border: 2px solid;
+}

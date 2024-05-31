@@ -1,0 +1,63 @@
+@import "../../../../assets/scss/variables.scss";
+
+:host {
+  display: block;
+  width: 350px;
+
+  @media #{$mobile-media} {
+    width: 250px;
+  }
+}
+
+.row {
+  position: relative;
+  height: 100%;
+  min-height: 60px;
+  width: 100%;
+  border-radius: 8px;
+  border: 1px solid $purple-3;
+  cursor: pointer;
+  margin: 0;
+  padding: 3px;
+  align-items: center;
+
+  &:hover {
+    opacity: 0.8;
+  }
+
+  &.selected {
+    background-color: $grey-3;
+  }
+
+  &.wrong {
+    background-color: $red-5;
+  }
+
+  &.correct {
+    background-color: $green-4;
+  }
+
+  &.disabled {
+    cursor: not-allowed;
+
+    &:hover {
+      opacity: 1;
+    }
+  }
+
+  .count {
+    position: absolute;
+    top: -5px;
+    left: 5px;
+    font-size: 12px;
+    color: $orange-3;
+  }
+
+  .words {
+    white-space: normal;
+    word-break: break-word;
+    padding: 0 12px;
+    margin: 0;
+    text-align: center;
+  }
+}

@@ -1,0 +1,132 @@
+<mat-checkbox
+  labelPosition="before"
+  (change)="onShow($event.checked, true)"
+  [checked]="isHideInTraning"
+  >Скрыть слова, которые уже добавленны в тренировку</mat-checkbox
+>
+<mat-checkbox
+  class="second"
+  labelPosition="before"
+  (change)="onShow($event.checked)"
+  [checked]="isHideKnown"
+  >Скрыть слова, которые вы уже знаете</mat-checkbox
+>
+
+<div class="statistic">
+  <p>Всего слов в словаре: <span>{{ allCount }}</span></p>
+  <p>Из них изучено слов: <span>{{ inKnownCount }}</span></p>
+  <p>Из них в процессе изучения: <span>{{ inTrainingCount }}</span></p>
+  <p>Еще не изучались: <span>{{ allCount - inKnownCount - inTrainingCount }}</span></p>
+</div>
+
+<button class="menu" mat-mini-fab color="accent" [matMenuTriggerFor]="menu">
+  <mat-icon>sort</mat-icon>
+</button>
+<mat-menu #menu="matMenu" [style.max-width]="'550px'">
+  <button mat-menu-item (click)="onSort({ titleDe: 1 })">
+    <mat-icon>arrow_downward</mat-icon>
+    <span>По алфавиту (по возрастанию)</span>
+  </button>
+  <button mat-menu-item (click)="onSort({ titleDe: -1 })">
+    <mat-icon>arrow_upward</mat-icon>
+    <span>По алфавиту (по убыванию)</span>
+  </button>
+  <button mat-menu-item (click)="onSort({ createdAt: -1 })">
+    <mat-icon>schedule</mat-icon>
+    <span>По добавленнию (сначала самые последние)</span>
+  </button>
+  <button mat-menu-item (click)="onSort({ createdAt: 1 })">
+    <mat-icon>history</mat-icon>
+    <span>По добавленнию (сначала самые первые)</span>
+  </button>
+</mat-menu>
+
+<div class="row wrap">
+  <mat-button-toggle-group
+    class="row wrap level-toggle"
+    #group="matButtonToggleGroup"
+    [value]="selectedType"
+    (click)="onTypeChange(group.value)"
+  >
+    <mat-button-toggle value="all">Все</mat-button-toggle>
+
+    @for (item of partOfSpeechArr; track item) {
+    <mat-button-toggle [value]="item"
+      >{{ transtations[item].ru }}
+    </mat-button-toggle>
+    }
+  </mat-button-toggle-group>
+</div>
+
+<div class="row second wrap">
+  <app-search-input
+    placeholder="Поиск по немецкому названию"
+    [isLoading]="isLoading"
+    [query]="searchDe"
+    (searchChanged)="onSearchChanged($event, 'de')"
+  ></app-search-input>
+
+  <span class="full">
+    <ng-container *ngTemplateOutlet="levelTemp"></ng-container>
+  </span>
+
+  <app-search-input
+    placeholder="Поиск по русскому названию"
+    [isLoading]="isLoading"
+    [query]="searchRu"
+    (searchChanged)="onSearchChanged($event, 'ru')"
+  ></app-search-input>
+</div>
+
+<span class="row mobile m-b">
+  <ng-container *ngTemplateOutlet="levelTemp"></ng-container>
+</span>
+
+<section>
+  @for (word of wordList; track word._id) {
+  <app-word-card
+    [word]="word"
+    [isSuperAdmin]="isSuperAdmin"
+    [isAdmin]="isAdmin"
+    (action)="onAction($event)"
+  ></app-word-card>
+  }
+</section>
+
+<mat-paginator
+  [length]="totalCount"
+  [pageSize]="pageSize"
+  [pageIndex]="pageIndex"
+  [pageSizeOptions]="pageSizeOptions"
+  [showFirstLastButtons]="true"
+  (page)="onHandlePageEvent($event)"
+>
+</mat-paginator>
+
+@if (isLoading) {
+<app-loader></app-loader>
+}
+
+<ng-template #levelTemp>
+  <div class="row wrap level-toggle">
+    <button
+      class="article"
+      type="button"
+      [ngClass]="{ active: selectedLevel === null }"
+      (click)="onLevel(null)"
+    >
+      Все
+    </button>
+
+    @for (level of levelArr; track level) {
+    <button
+      class="article"
+      type="button"
+      [ngClass]="{ active: selectedLevel === level }"
+      (click)="onLevel(level)"
+    >
+      {{ level }}
+    </button>
+    }
+  </div>
+</ng-template>

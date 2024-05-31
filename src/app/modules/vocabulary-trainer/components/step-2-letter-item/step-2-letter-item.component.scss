@@ -1,0 +1,35 @@
+@import "../../../../../assets/scss/variables.scss";
+
+.letter {
+  height: 50px;
+  width: 43px;
+  font-size: 32px;
+  background-color: $grey-8;
+  margin: 3px;
+  color: $grey-1;
+  cursor: pointer;
+
+  @media #{$mobile-media} {
+    height: 38px;
+    width: 30px;
+    font-size: 28px;
+    margin: 2px;
+  }
+
+  &.red {
+    background-color: $red-6;
+  }
+
+  &.green {
+    background-color: $green-4;
+    cursor: default;
+  }
+
+  &.hiden {
+    cursor: default;
+
+    span {
+      display: none;
+    }
+  }
+}

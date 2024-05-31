@@ -1,0 +1,300 @@
+@import "./assets/scss/variables.scss";
+
+html,
+body {
+  height: 100%;
+  background-color: $grey-0;
+  color: $white;
+
+  .mobile {
+    display: none !important;
+  }
+
+  @media #{$mobile-media} {
+    .full {
+      display: none !important;
+    }
+
+    .mobile {
+      display: flex !important;
+    }
+  }
+}
+
+* {
+  vertical-align: baseline;
+  box-sizing: border-box;
+  font-weight: inherit;
+  font-style: inherit;
+  color: inherit;
+  font-size: 100%;
+  border: 0 none;
+  outline: 0;
+  padding: 0;
+  margin: 0;
+}
+
+html {
+  -ms-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+b,
+strong {
+  font-weight: bold;
+}
+
+a,
+ins {
+  text-decoration: none !important;
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+ul {
+  list-style: none;
+}
+
+fieldset,
+img,
+abbr {
+  border: 0;
+}
+
+caption,
+th {
+  text-align: left;
+}
+
+button {
+  overflow: visible;
+  background: transparent;
+  line-height: normal;
+  -webkit-font-smoothing: inherit;
+  -moz-osx-font-smoothing: inherit;
+  cursor: pointer;
+
+  &[disabled] {
+    cursor: default;
+  }
+
+  &::-moz-focus-inner {
+    border: 0;
+    padding: 0;
+  }
+}
+
+h1 {
+  font-size: 34px;
+}
+
+h2 {
+  font-size: 28px;
+}
+
+h3 {
+  font-size: 24px;
+}
+
+h4 {
+  font-size: 20px;
+}
+
+h5 {
+  font-size: 18px;
+}
+
+p {
+  font-size: 16px;
+  white-space: pre-wrap;
+}
+
+textarea {
+  color: white;
+  caret-color: white !important;
+}
+
+input {
+  -moz-appearance: textfield;
+  color: white;
+  caret-color: white !important;
+
+  &::-webkit-search-decoration,
+  &::-webkit-search-cancel-button,
+  &::-webkit-search-results-button,
+  &::-webkit-search-results-decoration {
+    display: none;
+  }
+
+  &:hover,
+  &:focus {
+    -moz-appearance: textfield;
+  }
+
+  &::-webkit-inner-spin-button,
+  &::-webkit-outer-spin-button {
+    -moz-appearance: textfield;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    appearance: none;
+    margin: 0;
+  }
+}
+
+// Remove the native clear button from the input field for IE 10+
+input::-ms-clear {
+  display: none;
+}
+
+mat-option.mdc-list-item--selected.mat-mdc-option-active {
+  .mdc-list-item__primary-text {
+    color: $purple-4 !important;
+  }
+
+  .mat-pseudo-checkbox-checked.mat-pseudo-checkbox-minimal::after {
+    color: $purple-4 !important;
+  }
+}
+
+main {
+  position: relative;
+  min-height: calc(100vh - $footer-height - $header-height);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  flex-direction: column;
+
+  @media #{$mobile-media} {
+    max-width: 100vw;
+  }
+}
+
+a {
+  color: $purple-4;
+  text-decoration: underline;
+
+  &:hover {
+    color: $purple-2;
+    cursor: pointer;
+  }
+
+  &:active {
+    color: $purple-7;
+  }
+}
+
+.row,
+.column {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &.wrap {
+    flex-wrap: wrap;
+  }
+}
+
+.column {
+  position: relative;
+  flex-direction: column;
+
+  &.left {
+    align-items: flex-start;
+  }
+
+  &.right {
+    align-items: flex-end;
+  }
+}
+
+.row {
+  position: relative;
+
+  &.left {
+    justify-content: flex-start;
+  }
+
+  &.between {
+    justify-content: space-between;
+  }
+
+  &.right {
+    justify-content: flex-end;
+  }
+}
+
+.reflexiv {
+  color: $green-0 !important;
+}
+
+.trennbare {
+  color: $orange-8 !important;
+}
+
+.untrennbare {
+  color: $yellow-3 !important;
+}
+
+.trennbare,
+.untrennbare,
+.reflexiv {
+  font-size: 16px !important;
+}
+
+.prefix {
+  font-size: 20px !important;
+  margin-top: -2px;
+}
+
+.die {
+  color: $pink-4;
+}
+
+.das {
+  color: $green-4;
+}
+
+.der {
+  color: $blue-4;
+}
+
+b {
+  font-weight: 400;
+  color: $pink-4;
+  text-decoration: underline;
+}
+
+i {
+  font-weight: 400;
+  color: $pink-3;
+}
+
+.small-icon-button {
+  width: 26px !important;
+  height: 26px !important;
+  padding: 0px !important;
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+
+  & > *[role="img"] {
+    width: 18px;
+    height: 18px;
+    font-size: 18px;
+
+    svg {
+      width: 18px;
+      height: 18px;
+    }
+  }
+
+  .mat-mdc-button-touch-target {
+    width: 26px !important;
+    height: 26px !important;
+  }
+}

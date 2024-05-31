@@ -1,0 +1,10 @@
+@import "../../../../../assets/scss/variables.scss";
+
+button {
+  margin: 10px;
+  color: $purple-3;
+
+  &.delete {
+    color: $red-6;
+  }
+}

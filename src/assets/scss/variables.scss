@@ -1,0 +1,159 @@
+$mobile-max-width: 1050px;
+$mobile-media: "only screen and (max-width: #{$mobile-max-width})";
+
+
+// Colors
+$black: #000000;
+
+$grey-0: #303030;
+$grey-1: #212121;
+$grey-2: #424242;
+$grey-3: #616161;
+$grey-4: #757575;
+$grey-5: #9e9e9e;
+$grey-6: #bdbdbd;
+$grey-7: #e0e0e0;
+$grey-8: #eeeeee;
+$grey-9: #f5f5f5;
+$grey-10: #fafafa;
+
+$white: #ffffff;
+
+$blue-1: #80d8ff;
+$blue-2: #40c4ff;
+$blue-3: #00b0ff;
+$blue-4: #0091ea;
+
+$yellow-1: #ffff8d;
+$yellow-2: #ffff00;
+$yellow-3: #ffea00;
+$yellow-4: #ffd600;
+$yellow-5: #f9fbe7;
+$yellow-6: #f0f4c3;
+$yellow-7: #e6ee9c;
+$yellow-8: #dce775;
+$yellow-9: #d4e157;
+$yellow-10: #cddc39;
+$yellow-11: #c0ca33;
+$yellow-12: #afb42b;
+$yellow-13: #9e9d24;
+$yellow-14: #827717;
+
+$green-0: #69f0ae;
+$green-21: #023d21;
+$green-1: #ccff90;
+$green-2: #b2ff59;
+$green-3: #76ff03;
+$green-4: #64dd17;
+$green-5: #f1f8e9;
+$green-6: #dcedc8;
+$green-7: #c5e1a5;
+$green-8: #aed581;
+$green-9: #9ccc65;
+$green-10: #8bc34a;
+$green-11: #7cb342;
+$green-12: #689f38;
+$green-13: #558b2f;
+$green-14: #33691e;
+
+$red-1: #ffebee;
+$red-2: #ffcdd2;
+$red-3: #ef9a9a;
+$red-4: #e57373;
+$red-5: #ef5350;
+$red-6: #f44336;
+$red-7: #e53935;
+$red-8: #d32f2f;
+$red-9: #c62828;
+$red-10: #b71c1c;
+
+$orange-1: #fff3e0;
+$orange-2: #ffe0b2;
+$orange-3: #ffcc80;
+$orange-4: #ffb74d;
+$orange-5: #ffa726;
+$orange-6: #ff9800;
+$orange-7: #fb8c00;
+$orange-8: #f57c00;
+$orange-9: #ef6c00;
+$orange-10: #e65100;
+
+$pink-1: #fce4ec;
+$pink-2: #f8bbd0;
+$pink-3: #f48fb1;
+$pink-4: #f06292;
+$pink-5: #ec407a;
+$pink-6: #e91e63;
+$pink-7: #d81b60;
+$pink-8: #c2185b;
+$pink-9: #ad1457;
+$pink-10: #880e4f;
+
+$purple-1: #f3e5f5;
+$purple-2: #e1bee7;
+$purple-3: #ce93d8;
+$purple-4: #ba68c8;
+$purple-5: #ab47bc;
+$purple-6: #9c27b0;
+$purple-7: #8e24aa;
+$purple-8: #7b1fa2;
+$purple-9: #6a1b9a;
+$purple-10: #491469;
+
+$header-height: 40px;
+$footer-height: 46px;
+
+%text-ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+
+
+%cropping-with-ellipsis {
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  word-wrap: break-word;
+  word-break: break-all;
+}
+
+%cropping-with-ellipsis-two {
+  @extend %cropping-with-ellipsis;
+  -webkit-line-clamp: 2;
+}
+
+%cropping-with-ellipsis-three {
+  @extend %cropping-with-ellipsis;
+  -webkit-line-clamp: 3;
+}
+
+// ghost animation
+
+%ghost-animation {
+  animation-name: ghost-loading;
+  animation-duration: 1s;
+  animation-iteration-count: infinite;
+  animation-timing-function: ease-in-out;
+}
+
+@keyframes ghost-loading {
+  from {
+    background-color: $grey-5;
+  }
+  to {
+    background-color: $grey-3;
+  }
+}
+
+@keyframes hide-opacity {
+  0% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}

@@ -1,0 +1,10 @@
+<main>
+  <section>
+    @for (item of links; track item.link) {
+    <app-choice-card
+      [linkTitle]="item.linkTitle"
+      [link]="item.link"
+    ></app-choice-card>
+    }
+  </section>
+</main>

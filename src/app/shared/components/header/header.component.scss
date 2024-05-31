@@ -1,0 +1,59 @@
+@import "../../../../assets/scss/variables.scss";
+
+:host {
+  position: relative;
+}
+@media #{$mobile-media} {
+  :host {
+    display: flex;
+    max-width: 100vw;
+    min-width: 100vw;
+
+    .mobile {
+      padding: 0 4%;
+      justify-content: space-between;
+    }
+  }
+}
+
+mat-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: $header-height;
+  transition: transform 0.3s ease;
+}
+
+a {
+  position: relative;
+  font-size: 20px;
+  margin: 0 15px;
+  color: $purple-2;
+
+  &:hover {
+    transition: color 0.3s ease, transform 0.3s ease;
+    color: $purple-1;
+    transform: scale(1.05);
+  }
+
+  &.active {
+    text-decoration: underline !important;
+    color: $purple-1;
+  }
+}
+
+.right {
+  position: absolute;
+  right: 30px;
+  top: 8px;
+}
+
+.left {
+  position: absolute;
+  left: 16px;
+  top: 8px;
+}
+
+button {
+  margin-left: 10px;
+}

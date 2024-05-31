@@ -1,0 +1,242 @@
+@if (isLoading) {
+<app-loader></app-loader>
+} @else { @if(step !== 0 && step !== 5) {
+<button
+  class="cancel"
+  color="accent"
+  mat-icon-button
+  (click)="onCancelTraining()"
+  matTooltip="Отменить тренировку"
+>
+  <mat-icon>cancel</mat-icon>
+</button>
+} @else { @if (step === 0 && totalCount) {
+<button
+  class="clear-all"
+  color="warn"
+  mat-icon-button
+  (click)="onClearTrainings()"
+  matTooltip="Очистить весь список тренировок"
+>
+  <mat-icon>folder_delete</mat-icon>
+</button>
+}
+
+<h1>Словарный тренажер</h1>
+} @switch (step) { @case (0) { @if (totalRelevCount) {
+<h3>{{ subtitle }}</h3>
+<mat-button-toggle-group
+  class="training-toggle"
+  #group="matButtonToggleGroup"
+  [value]="limit"
+  (click)="onLiminChange(group.value)"
+>
+  <mat-button-toggle [value]="5">5</mat-button-toggle>
+  <mat-button-toggle [value]="10">10</mat-button-toggle>
+  <mat-button-toggle [value]="15">15</mat-button-toggle>
+  <mat-button-toggle [value]="20">20</mat-button-toggle>
+  <mat-button-toggle [value]="30">30</mat-button-toggle>
+  <mat-button-toggle [value]="50">50</mat-button-toggle>
+  <mat-button-toggle [value]="100">100</mat-button-toggle>
+</mat-button-toggle-group>
+
+<button
+  class="start row"
+  type="button"
+  color="primary"
+  mat-raised-button
+  (click)="onStart()"
+>
+  Начать тренировку
+</button>
+} @if (isAllWordLoading) {
+<mat-spinner></mat-spinner>
+} @else { @if (totalCount && !totalRelevCount) {
+<h4>
+  На сегодня все слова повторены. <br />Можно добавить еще слова для тренировки
+  на странице
+  <a routerLink="/word-editor/word-list">списка слов</a>
+</h4>
+} @if (!totalCount) {
+<h4>
+  В вашем тренажере нет слов для тренировке. <br />Добавьте их на странице
+  <a routerLink="/word-editor/word-list">списка слов</a>
+</h4>
+} @else {
+<h3>{{ getSubtitle(totalCount, true) }}</h3>
+
+<div class="column left m-b">
+  @for (training of allTrainings; track training._id) {
+  <div class="row training-word">
+    <p class="word-list">
+      @if (training.word.article) {
+      <span [class]="training.word.article + ' m-r'">{{
+        training.word.article
+      }}</span>
+      } @if (training.word.isReflexivVerb) {
+      <span class="reflexiv m-r">(sich)</span>
+      } @if (training.word.prefix) { @if (training.word.isTrennbareVerben) {
+      <span class="trennbare">{{ training.word.prefix }}</span
+      ><span class="prefix trennbare">|</span>
+      } @else {
+      <span class="untrennbare">{{ training.word.prefix }}</span
+      ><span class="prefix untrennbare">•</span>
+      } }
+      <span
+        [matTooltip]="
+          isSuperAdmin || isAdmin
+            ? 'Перейти к редактированию данного слова'
+            : ''
+        "
+        class="title m-r"
+        [routerLink]="
+          isSuperAdmin || isAdmin
+            ? ['/word-editor/edit-word/' + training.word._id]
+            : null
+        "
+      >
+        {{ training.word.titleDe }}
+      </span>
+      <span class="m-r">-</span>
+      <span class="m-r">{{ training.word.titleRu.join(", ") }}</span>
+      <span class="date">
+        Повтор ({{ training.repeatLevel }}):
+        {{ training.nextRepeatDate | date : "dd-MM-YYYY (HH:mm)" }}
+      </span>
+    </p>
+    <button
+      class="delete small-icon-button"
+      mat-icon-button
+      color="warn"
+      matTooltip="Удалить тренировку этого слова"
+      (click)="onDeleteTraining(training._id)"
+    >
+      <mat-icon>delete_forever</mat-icon>
+    </button>
+
+    <button
+      class="add small-icon-button"
+      mat-icon-button
+      color="accent"
+      matTooltip="Сбросить прогресс тренировки этого слова"
+      (click)="onDateUpdate(training._id)"
+    >
+      <mat-icon>restart_alt</mat-icon>
+    </button>
+  </div>
+  <hr />
+  }
+</div>
+
+@if (totalCount) {
+<mat-paginator
+  [length]="totalCount"
+  [pageIndex]="pageIndex"
+  [pageSize]="pageSize"
+  [pageSizeOptions]="pageSizeOptions"
+  [showFirstLastButtons]="true"
+  (page)="onHandlePageEvent($event)"
+>
+</mat-paginator>
+} } } } @case (1) {
+<app-step-1
+  [testTasks]="testTasks_1"
+  (mistake)="onMistake($event)"
+  (end)="onEnd()"
+  (deleteTraining)="onDeleteTraining($event)"
+></app-step-1>
+} @case (2) {
+<app-step-1
+  mode="ru"
+  [testTasks]="testTasks_2"
+  (mistake)="onMistake($event)"
+  (end)="onEnd()"
+  (deleteTraining)="onDeleteTraining($event)"
+></app-step-1>
+} @case (3) {
+<app-step-2
+  [testTasks]="testTasks_3"
+  (mistake)="onMistake($event)"
+  (end)="onEnd()"
+></app-step-2>
+} @case (4) {
+<app-step-3
+  [testTasks]="testTasks_4"
+  (mistake)="onMistake($event)"
+  (end)="onEnd()"
+></app-step-3>
+} @case (5) {
+
+<h3>Слова без ошибок ({{ correctTrainings.length }}):</h3>
+<div class="column left">
+  @for (training of correctTrainings; track training._id; let last = $last) {
+  <div class="row">
+    <p class="list">
+      @if (training.word.article) {
+      <span [class]="training.word.article">{{ training.word.article }}</span>
+      }
+      <span class="first">
+        {{
+          (training.word.isReflexivVerb ? "(sich) " : "") +
+            (training.word.prefix || "") +
+            training.word.titleDe
+        }}
+      </span>
+      <span class="repeat">{{ getRepeat(training.repeatLevel) }}</span>
+      <span>({{ training.word.titleRu.join(", ") }})</span>
+    </p>
+    <button
+      mat-icon-button
+      color="accent"
+      matTooltip="Добавить слово в повторение завтра"
+      matTooltipPosition="right"
+      (click)="onChangeError(training._id, 'add')"
+    >
+      <mat-icon>add</mat-icon>
+    </button>
+  </div>
+  @if(!last) {
+  <hr />
+  } }
+</div>
+
+<h3>Слова с ошибками ({{ mistakeTrainings.length }}):</h3>
+<div class="column left">
+  @for (training of mistakeTrainings; track training._id) {
+  <div class="row">
+    <p class="list">
+      @if (training.word.article) {
+      <span [class]="training.word.article">{{ training.word.article }}</span>
+      }
+      <span class="first">
+        {{
+          (training.word.isReflexivVerb ? "(sich) " : "") +
+            (training.word.prefix || "") +
+            training.word.titleDe
+        }}
+      </span>
+      <span class="repeat">завтра</span>
+      <span>({{ training.word.titleRu.join(", ") }})</span>
+    </p>
+    <button
+      mat-icon-button
+      color="warn"
+      matTooltip="Удалить информацию об этой ошибке"
+      matTooltipPosition="right"
+      (click)="onChangeError(training._id, 'remove')"
+    >
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+  }
+</div>
+<button
+  class="save"
+  type="button"
+  color="primary"
+  mat-raised-button
+  (click)="onSave()"
+>
+  Сохранить результаты тренировки
+</button>
+} } }

@@ -1,0 +1,46 @@
+@import "../../../../assets/scss/variables.scss";
+
+.dialog {
+  &__close-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    z-index: 5000;
+  }
+
+  &__container {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+    padding: 30px;
+  }
+
+  &__message {
+    margin-top: 20px;
+    line-height: 24px;
+    text-align: center;
+  }
+
+  &__actions {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+
+    button {
+      margin: 0 10px;
+    }
+  }
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 30px;
+
+  &.red {
+    color: $red-6 !important;;
+    font-weight: 500;
+  }
+}

@@ -1,0 +1,126 @@
+@import "../../../../../assets/scss/variables.scss";
+
+:host {
+  position: relative;
+  display: block;
+  width: 100%;
+
+  .m-b {
+    margin-bottom: 20px;
+  }
+
+  section {
+    width: 100%;
+    padding: 0 50px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-content: flex-start;
+    align-items: stretch;
+    min-height: calc(100vh - $footer-height - $header-height - 230px);
+
+    app-word-card {
+      margin: 0 5px 5px 0;
+    }
+  }
+
+  .statistic {
+    position: absolute;
+    top: 10px;
+    left: 100px;
+
+    p {
+      font-size: 14px;
+      margin: 0 !important;
+      color: $yellow-1;
+
+      span {
+        color: $yellow-4;
+        font-weight: bold;
+      }
+    }
+
+    @media #{$mobile-media} {
+      visibility: hidden;
+    }
+  }
+
+  app-search-input {
+    max-width: 350px;
+    margin: 5px auto;
+  }
+}
+
+.second {
+  margin-bottom: 15px;
+}
+
+.back {
+  position: absolute;
+  top: 40px;
+  left: 50px;
+}
+
+mat-button-toggle-group {
+  margin: 0 auto 10px auto;
+
+}
+
+.level-toggle {
+  ::ng-deep {
+    @media #{$mobile-media} {
+      mat-button-toggle {
+        span {
+          padding: 0 8px;
+        }
+      }
+
+      .article {
+        width: 44px;
+      }
+    }
+  }
+}
+
+.article {
+  height: 30px;
+  width: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid $purple-2;
+  border-radius: 5px;
+  background-color: $grey-3;
+  margin: 4px;
+
+  &.active {
+    background-color: $grey-1;
+  }
+}
+
+.menu {
+  position: absolute;
+  top: 20px;
+  left: 15px;
+  z-index: 5;
+}
+
+.mat-mdc-menu-item {
+  mat-icon {
+    width: 40px !important;
+  }
+}
+
+.level {
+  flex-wrap: wrap;
+}
+
+mat-checkbox {
+  width: 100%;
+  text-align: end;
+  padding-right: 20px;
+
+  &.second {
+    margin-top: -5px;
+  }
+}

@@ -1,0 +1,32 @@
+@import "../../../../assets/scss/variables.scss";
+
+button {
+  position: relative;
+  height: 36px;
+  width: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid $purple-3;
+  border-radius: 5px;
+  background-color: $grey-3;
+  margin-right: 8px;
+  margin-bottom: 20px;
+
+  span {
+    position: absolute;
+    top: 0;
+    left: 2px;
+    font-size: 14px;
+    color: $purple-3;
+  }
+
+  &.red {
+    background-color: $red-6;
+  }
+
+  &.green {
+    background-color: $green-4;
+    cursor: default;
+  }
+}

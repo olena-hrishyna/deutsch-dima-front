@@ -1,0 +1,48 @@
+<main>
+  <h1>{{ currentTitle }}</h1>
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <mat-form-field class="form-field">
+      <mat-label>Логин</mat-label>
+      <input
+        matInput
+        #login
+        readonly
+        (focus)="login.removeAttribute('readonly')"
+        formControlName="login"
+      />
+    </mat-form-field>
+
+    <mat-form-field class="form-field">
+      <mat-label>Пароль</mat-label>
+      <input
+        matInput
+        [type]="isPasswordVisible ? 'text' : 'password'"
+        formControlName="password"
+      />
+      <button
+        mat-icon-button
+        matSuffix
+        (click)="onChangePasswordVisible($event)"
+        [attr.aria-pressed]="isPasswordVisible"
+      >
+        <mat-icon>{{
+          isPasswordVisible ? "visibility" : "visibility_off"
+        }}</mat-icon>
+      </button>
+    </mat-form-field>
+
+    <button
+      mat-raised-button
+      color="primary"
+      type="submit"
+      [disabled]="form.invalid || isLoading"
+    >
+      Регистрация
+    </button>
+  </form>
+  <p>Уже есть аккаунт?<a routerLink="/auth/login">Войти</a></p>
+</main>
+
+@if (isLoading) {
+<app-loader></app-loader>
+}

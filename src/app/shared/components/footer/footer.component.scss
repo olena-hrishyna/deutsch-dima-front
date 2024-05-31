@@ -1,0 +1,52 @@
+@import "../../../../assets/scss/variables.scss";
+
+mat-toolbar {
+  display: flex;
+  height: $footer-height;
+  justify-content: space-between;
+}
+
+.linkedin {
+  height: calc($footer-height - 4px);
+  width: calc($footer-height - 4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  ::ng-deep {
+    * {
+      max-height: calc($footer-height - 2px) !important;
+      max-width: calc($footer-height - 2px) !important;
+    }
+  }
+
+  &:hover {
+    opacity: 0.8;
+  }
+}
+
+p {
+  font-size: 16px;
+  margin-bottom: 4px;
+}
+
+.left {
+  height: 100%;
+  margin-left: 16px;
+
+  p {
+    font-size: 12px;
+    line-height: calc($footer-height / 2);
+    margin: 0;
+  }
+}
+
+.right {
+  display: flex;
+  align-items: center;
+  margin-right: 12px;
+
+  p {
+    margin-bottom: -2px;
+  }
+}

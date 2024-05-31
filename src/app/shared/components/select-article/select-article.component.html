@@ -1,0 +1,32 @@
+<div class="row">
+  <button
+    [ngClass]="{
+      red: mistakeAntworts.includes(articles.der),
+      green: correctAntwort === articles.der
+    }"
+    (click)="onArticle(articles.der)"
+  >
+    <span>1</span>
+    der
+  </button>
+  <button
+    [ngClass]="{
+      red: mistakeAntworts.includes(articles.die),
+      green: correctAntwort === articles.die
+    }"
+    (click)="onArticle(articles.die)"
+  >
+    <span>2</span>
+    die
+  </button>
+  <button
+    [ngClass]="{
+      red: mistakeAntworts.includes(articles.das),
+      green: correctAntwort === articles.das
+    }"
+    (click)="onArticle(articles.das)"
+  >
+    <span>3</span>
+    das
+  </button>
+</div>

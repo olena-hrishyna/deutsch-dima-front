@@ -1,0 +1,60 @@
+<div class="test">
+  @if(currTests && currTests[0]) {
+  <h2>
+    {{ currTests[0].testTitle }}
+    <app-audio-player
+      [isAutoPlay]="false"
+      [audio]="currTests[0].audio?.data"
+    ></app-audio-player>
+    @if(currMistakeId) {
+    <button
+      class="error"
+      mat-icon-button
+      color="warn"
+      matTooltip="Удалить информацию об этой ошибке"
+      (click)="onRemoveError()"
+    >
+      <mat-icon>error</mat-icon>
+    </button>
+    }
+  </h2>
+
+  @if(currTests[0].article) {
+  <h2>
+    <app-select-article
+      [correctArticle]="currTests[0].article"
+      (mistake)="onArticleMistake()"
+    ></app-select-article>
+  </h2>
+  }
+
+  <div class="container row">
+    @for (letter of currTests[0].testAnswer; track letter; let index = $index) {
+    <app-step-2-letter-item
+      [letter]="letter"
+      [isCorrect]="index < correctAnswerIndex"
+      [isMistake]="index === mistakeAnswerIndex"
+    ></app-step-2-letter-item>
+    }
+  </div>
+  }
+
+  <div class="variants row">
+    @for (letter of currTests[0].testLetters; track letter) {
+    <app-step-2-letter-item
+      mode="variants"
+      [letter]="letter"
+      (action)="onAction($event)"
+    ></app-step-2-letter-item>
+    }
+  </div>
+
+  <div
+    class="actions"
+    [style.visibility]="isButtonVisible ? 'visible' : 'hidden'"
+  >
+    <button mat-raised-button color="primary" type="button" (click)="onNext()">
+      Дальше
+    </button>
+  </div>
+</div>

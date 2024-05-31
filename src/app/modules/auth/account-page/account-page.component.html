@@ -1,0 +1,57 @@
+<main>
+  <div class="row">
+    <h1 class="login__title">Личный кабинет</h1>
+    @if (!isEditMode) {
+    <button
+      class="edit-btn"
+      color="accent"
+      mat-icon-button
+      matTooltipPosition="above"
+      matTooltip="Редактировать"
+      (click)="onEdit(true)"
+    >
+      <mat-icon>edit</mat-icon>
+    </button>
+    }
+  </div>
+
+  <form [formGroup]="form" novalidate="" (ngSubmit)="onSubmit()">
+    <mat-form-field class="form-field">
+      <mat-label>Логин</mat-label>
+      <input matInput formControlName="login" />
+    </mat-form-field>
+
+    <mat-form-field class="form-field">
+      <mat-label>Пароль</mat-label>
+      <input matInput type="text" formControlName="password" />
+    </mat-form-field>
+
+    @if (isEditMode) {
+    <div class="actions row">
+      <button mat-raised-button type="button" (click)="onEdit(false)">
+        Отменить изменения
+      </button>
+      <button
+        mat-raised-button
+        color="primary"
+        type="submit"
+        [disabled]="form.invalid || isLoading"
+      >
+        Сохранить изменения
+      </button>
+    </div>
+    }
+  </form>
+  <button
+    class="delete"
+    mat-stroked-button
+    color="warn"
+    (click)="onDeleteAccount()"
+  >
+    Удалить аккаунт
+  </button>
+</main>
+
+@if (isLoading) {
+<app-loader></app-loader>
+}

@@ -1,0 +1,11 @@
+<div
+  class="letter row"
+  [ngClass]="{
+    green: isCorrect && mode === 'answer',
+    hiden: !isCorrect && mode === 'answer',
+    red: isMistake && mode === 'answer'
+  }"
+  (click)="onAction()"
+>
+  <span>{{ letter }}</span>
+</div>

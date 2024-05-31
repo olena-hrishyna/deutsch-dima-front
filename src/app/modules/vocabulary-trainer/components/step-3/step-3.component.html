@@ -1,0 +1,48 @@
+@if (isTestRunning) {
+<div class="container">
+  @if (currTests[0].audio?.data) {
+  <app-audio-player [audio]="currTests[0].audio.data"></app-audio-player>
+  } @else {
+  <h2>{{ currTests[0].testTitle }}</h2>
+  }
+  <mat-form-field appearance="outline">
+    <mat-label>Ваш вариант</mat-label>
+    <input #input matInput type="text" [(ngModel)]="currAnswer" />
+    <mat-hint>Напишите услышанное слово (<b>без артикля!</b>)</mat-hint>
+    @if (currAnswer) {
+    <button
+      matSuffix
+      mat-icon-button
+      aria-label="Clear"
+      (click)="currAnswer = ''"
+    >
+      <mat-icon>close</mat-icon>
+    </button>
+    }
+  </mat-form-field>
+</div>
+} @else if (currTests[0]) {
+<p>Правильный ответ:</p>
+<h2 class="answer">
+  {{ currTests[0].testAnswer }}
+</h2>
+<h3>({{ currTests[0].testTitle }})</h3>
+<p>Ваш ответ:</p>
+<h2 class="answer" [ngClass]="{ error: !!currMistakeId }">
+  {{ currAnswer }}
+</h2>
+}
+<div
+  class="actions"
+  [style.visibility]="currAnswer.length ? 'visible' : 'hidden'"
+>
+  <button
+    mat-raised-button
+    class="next"
+    color="primary"
+    type="button"
+    (click)="onNext()"
+  >
+    Дальше
+  </button>
+</div>

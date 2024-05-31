@@ -1,0 +1,17 @@
+<h3
+  class="row"
+  [ngClass]="{
+    wrong: !isCorrectAnswer && isChecked || mode === 'second' && word?.isWrong,
+    correct: isCorrectAnswer && isChecked || mode === 'second' && word?.isCorrect,
+    selected: isSelected,
+    disabled: mode === 'second' && word?.isCorrect
+  }"
+  (click)="onAction()"
+>
+  @if (index) {
+  <p class="count">{{ index }}</p>
+  }
+  <p class="words">
+    {{ word?.wordTitle }}
+  </p>
+</h3>

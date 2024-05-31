@@ -1,0 +1,297 @@
+<a
+  class="back"
+  [routerLink]="historyService.previousUrl || '/word-editor/word-list'"
+  routerLinkActive="active"
+  >Назад</a
+>
+
+<h1>{{ currentTitle }}</h1>
+@if (edidingWord) {
+<app-upload-audio
+  [word]="edidingWord"
+  (updatedWord)="onUpdatedWord($event)"
+></app-upload-audio>
+@if (edidingWord.audio?.data) {
+<app-audio-player
+  [audio]="edidingWord.audio.data"
+  [isAutoPlay]="false"
+></app-audio-player>
+} }
+
+<mat-button-toggle-group
+  #group="matButtonToggleGroup"
+  class="add-words-toggle"
+  [value]="selectedType"
+  (click)="onTypeChange(group.value)"
+>
+  @for (item of partOfSpeechArr; track item) {
+  <mat-button-toggle [value]="item">{{
+    transtations[item].ru
+  }}</mat-button-toggle>
+  }
+</mat-button-toggle-group>
+
+<form
+  [ngClass]="{ 'left-shift': selectedType === partOfSpeech.Verb }"
+  [formGroup]="form"
+  novalidate
+  (ngSubmit)="onSubmit()"
+>
+  <div class="row level">
+    @for (level of levelArr; track level) {
+    <button
+      class="article"
+      type="button"
+      [ngClass]="{ active: selectedLevel === level }"
+      (click)="onLevel(level)"
+    >
+      {{ level }}
+    </button>
+    }
+  </div>
+  <div class="row container">
+    <div
+      class="column first"
+      [ngClass]="{ oben: selectedType === partOfSpeech.Verb }"
+    >
+      @if (selectedType === partOfSpeech.Verb) {
+      <button
+        class="reflexiv2"
+        type="button"
+        [ngClass]="{ active: isReflexivVerb }"
+        (click)="onReflexivVerb()"
+      >
+        sich (возвратный / reflexiv)
+      </button>
+      <div class="row">
+        <div class="column shift">
+          <button
+            class="prefix2"
+            type="button"
+            [ngClass]="{ active: isTrennbareVerben }"
+            (click)="onTrennbareVerben(true)"
+          >
+            Отделяемый
+          </button>
+          <button
+            class="prefix2"
+            type="button"
+            [ngClass]="{ active: !isTrennbareVerben }"
+            (click)="onTrennbareVerben(false)"
+          >
+            Неотделяемый
+          </button>
+        </div>
+        <mat-form-field class="form-field smal">
+          <mat-label>Префикс</mat-label>
+          <input matInput type="text" formControlName="prefix" />
+        </mat-form-field>
+      </div>
+      }
+      <div [ngClass]="{ 'noun-wrap': selectedType === partOfSpeech.Noun }">
+        <div class="wrap">
+          @if (selectedType === partOfSpeech.Noun) {
+          <div class="row">
+            @for (article of articles; track article) {
+            <button
+              class="article"
+              type="button"
+              [ngClass]="{ active: selectedArticle === article }"
+              (click)="onArticle(article)"
+            >
+              {{ article }}
+            </button>
+            }
+          </div>
+          <mat-form-field class="form-field">
+            <mat-label>Женская форма</mat-label>
+            <input matInput type="text" formControlName="feminin" />
+          </mat-form-field>
+          <mat-form-field class="form-field">
+            <mat-label>Множественное число</mat-label>
+            <input matInput type="text" formControlName="titleDePl" />
+          </mat-form-field>
+          }
+          <mat-form-field class="form-field">
+            <mat-label>Слово на немецком</mat-label>
+            <input matInput type="text" formControlName="titleDe" />
+          </mat-form-field>
+        </div>
+        <div class="wrap">
+          <div
+            class="form-field row"
+            [ngClass]="{ right: titleRuArray.controls.length === 1 }"
+            formArrayName="titleRuArray"
+          >
+            <div>
+              @for (titleRuControl of titleRuArray.controls; track
+              titleRuControl; let i = $index) {
+              <div class="row">
+                <mat-form-field
+                  class="form-field bigger"
+                  [ngClass]="{ lang: titleRuArray.controls.length === 1 }"
+                >
+                  <mat-label>Перевод на русский</mat-label>
+                  <input matInput type="text" formControlName="{{ i }}" />
+                </mat-form-field>
+                @if(titleRuArray.controls.length > 1) {
+                <button
+                  class="delete"
+                  type="button"
+                  mat-icon-button
+                  (click)="removeTitleRuField(i)"
+                >
+                  <mat-icon>delete</mat-icon>
+                </button>
+                }
+              </div>
+              }
+              <button
+                class="add"
+                mat-icon-button
+                type="button"
+                (click)="addTitleRuField()"
+              >
+                <mat-icon>add_circle</mat-icon>
+              </button>
+            </div>
+          </div>
+
+          <mat-form-field class="form-field">
+            <mat-label>Пример использования</mat-label>
+            <textarea
+              matInput
+              rows="6"
+              formControlName="exampleUsage"
+            ></textarea>
+          </mat-form-field>
+        </div>
+      </div>
+    </div>
+    @if (selectedType === partOfSpeech.Verb) {
+    <div class="column second">
+      <div class="row">
+        <div class="column shift">
+          <button
+            class="auxiliary"
+            type="button"
+            [ngClass]="{
+              active: selectedAuxiliaryVerb === auxiliaryVerb.haben
+            }"
+            (click)="onAuxiliaryVerb(auxiliaryVerb.haben)"
+          >
+            hat
+          </button>
+          <button
+            class="auxiliary"
+            type="button"
+            [ngClass]="{ active: selectedAuxiliaryVerb === auxiliaryVerb.sein }"
+            (click)="onAuxiliaryVerb(auxiliaryVerb.sein)"
+          >
+            ist
+          </button>
+        </div>
+        <mat-form-field class="form-field mid">
+          <mat-label>форма Perfekt</mat-label>
+          <input matInput type="text" formControlName="perfektForm" />
+        </mat-form-field>
+      </div>
+      <mat-form-field class="form-field">
+        <mat-label>форма Präteritum Ich</mat-label>
+        <input matInput type="text" formControlName="präteritumFormIch" />
+      </mat-form-field>
+      <mat-form-field class="form-field">
+        <mat-label>форма Präteritum Du</mat-label>
+        <input matInput type="text" formControlName="präteritumFormDu" />
+      </mat-form-field>
+      <mat-form-field class="form-field">
+        <mat-label>форма Präteritum Er/Sie/Es</mat-label>
+        <input matInput type="text" formControlName="präteritumFormEr" />
+      </mat-form-field>
+      <mat-form-field class="form-field">
+        <mat-label>форма Präteritum Wir</mat-label>
+        <input matInput type="text" formControlName="präteritumFormWir" />
+      </mat-form-field>
+      <mat-form-field class="form-field">
+        <mat-label>форма Präteritum Ihr</mat-label>
+        <input matInput type="text" formControlName="präteritumFormIhr" />
+      </mat-form-field>
+    </div>
+    <div class="column third">
+      <mat-radio-group (change)="onRegularChange($event.value)">
+        <mat-radio-button [checked]="!isIrregular" [value]="!isIrregular"
+          >regelmäßig</mat-radio-button
+        >
+        <mat-radio-button [value]="isIrregular">unregelmäßig</mat-radio-button>
+      </mat-radio-group>
+
+      <mat-form-field class="form-field">
+        <mat-label>форма Konjunktiv II Ich</mat-label>
+        <input matInput type="text" formControlName="konjunktiv2FormIch" />
+      </mat-form-field>
+      <mat-form-field class="form-field">
+        <mat-label>форма Konjunktiv II Du</mat-label>
+        <input matInput type="text" formControlName="konjunktiv2FormDu" />
+      </mat-form-field>
+      <mat-form-field class="form-field">
+        <mat-label>форма Konjunktiv II Er/Sie/Es</mat-label>
+        <input matInput type="text" formControlName="konjunktiv2FormEr" />
+      </mat-form-field>
+      <mat-form-field class="form-field">
+        <mat-label>форма Konjunktiv II Wir</mat-label>
+        <input matInput type="text" formControlName="konjunktiv2FormWir" />
+      </mat-form-field>
+      <mat-form-field class="form-field">
+        <mat-label>форма Konjunktiv II Ihr</mat-label>
+        <input matInput type="text" formControlName="konjunktiv2FormIhr" />
+      </mat-form-field>
+    </div>
+    }
+  </div>
+
+  <div class="row controls">
+    <button
+      mat-raised-button
+      color="primary"
+      type="submit"
+      [disabled]="isLoading"
+    >
+      {{ isEditMode ? "Сохранить" : "Создать" }}
+    </button>
+
+    @if (isEditMode) {
+    <button
+      mat-raised-button
+      color="primary"
+      type="button"
+      [disabled]="isLoading"
+      (click)="onCancel()"
+    >
+      Отменить
+    </button>
+    }
+  </div>
+</form>
+
+<p class="row training" (click)="onAddToTraining()">
+  <mat-icon>add_circle</mat-icon>Добавить это слово мне в тренировку
+</p>
+<p class="row new" routerLink="/word-editor/add-word">
+  <mat-icon>add_circle</mat-icon>Добавить новое слово
+</p>
+
+@if (edidingWord) {
+  <button
+    class="delete-word"
+    color="warn"
+    type="button"
+    matTooltip="Удалить слово"
+    mat-icon-button
+    (click)="onDeleteWord()"
+  >
+    <mat-icon>delete</mat-icon>
+  </button>
+}
+@if (isLoading) {
+<app-loader></app-loader>
+}

@@ -1,0 +1,75 @@
+<a
+  [routerLink]="
+    isSuperAdmin || isAdmin ? '/word-editor/edit-word/' + word?._id : null
+  "
+  class="link"
+>
+  <div [class]="word?.audio || 'withoutAudio'">
+    <div class="row left">
+      @if (word?.isReflexivVerb) {
+      <p class="de reflexiv">(sich)</p>
+      } @else if (word?.article) {
+      <p [class]="word?.article">{{ word?.article }}</p>
+      } @if (word?.prefix) { @if (word?.isTrennbareVerben) {
+      <p class="de trennbare">{{ word?.prefix }}</p>
+      <p class="trennbare prefix">|</p>
+      } @else {
+      <p class="de untrennbare">{{ word?.prefix }}</p>
+      <p class="untrennbare prefix">•</p>
+      } }
+      <p class="de">{{ word?.titleDe }}</p>
+      @if (word?.partOfSpeech === 'Verb') {
+      <p [class]="'de ' + word?.auxiliaryVerb">
+        ({{ word?.auxiliaryVerb === "sein" ? "ist" : "hat" }})
+      </p>
+      }
+    </div>
+    @for (title of word?.titleRu; track title; let last = $last) {
+    <p class="ru">{{ title + (last ? "" : ", ") }}</p>
+    }
+  </div>
+  <div class="column right second">
+    <div class="row">
+      @if(!word?.isKnown) {
+      <button
+        class="known"
+        matTooltipPosition="right"
+        matTooltip="Добавить слово в известные вам"
+        (click)="onAction($event, 'add-known')"
+      >
+        <mat-icon color="accent">school</mat-icon>
+      </button>
+      } @else {
+      <button
+        class="known"
+        matTooltipPosition="right"
+        matTooltip="Удалить слово из известных вам"
+        (click)="onAction($event, 'remove-known')"
+      >
+        <mat-icon color="accent">check_circle</mat-icon>
+      </button>
+      }
+      <h4>{{ word?.level }}</h4>
+    </div>
+    <div class="row">
+      <p class="part">{{ word?.partOfSpeech }}</p>
+      @if(!word?.isInTraining) {
+      <button
+        matTooltipPosition="right"
+        matTooltip="Добавить слово к тренировке"
+        (click)="onAction($event, 'add')"
+      >
+        <mat-icon color="accent">add_circle</mat-icon>
+      </button>
+      } @if (isSuperAdmin) {
+      <button
+        matTooltipPosition="right"
+        matTooltip="Удалить слово навсегда из базы данных"
+        (click)="onAction($event, 'delete')"
+      >
+        <mat-icon color="warn">delete</mat-icon>
+      </button>
+      }
+    </div>
+  </div>
+</a>

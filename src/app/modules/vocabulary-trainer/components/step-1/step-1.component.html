@@ -1,0 +1,80 @@
+<div class="column">
+  <div class="counter">{{ counter }}</div>
+  @if(currTest) {
+  <p class="level">{{ currTest.level }}</p>
+  <div class="column second">
+    <div class="row title">
+      @if(mode === 'de') { @if(currTest.article) {
+      <h2 [class]="currTest.article">
+        {{ currTest.article }}
+      </h2>
+      } @if (currTest.isReflexivVerb) {
+      <h2 class="reflexiv">(sich)</h2>
+      } @if (currTest.prefix) { @if (currTest.isTrennbareVerben) {
+      <h2 class="trennbare">{{ currTest.prefix }}</h2>
+      <h2 class="prefix trennbare">|</h2>
+      } @else {
+      <h2 class="untrennbare">{{ currTest.prefix }}</h2>
+      <h2 class="prefix untrennbare">•</h2>
+      } } }
+      <div class="column">
+        <h2>{{ currTest.testTitle }}</h2>
+      </div>
+      <app-audio-player
+        [isAutoPlay]="mode === 'de'"
+        [audio]="currTest.audio?.data"
+      ></app-audio-player>
+      <button
+        class="delete"
+        mat-icon-button
+        color="warn"
+        matTooltip="Удалить тренировку этого слова"
+        (click)="onDeleteTraining()"
+      >
+        <mat-icon>delete_forever</mat-icon>
+      </button>
+      @if(currMistakeId) {
+      <button
+        class="error"
+        mat-icon-button
+        color="primary"
+        matTooltip="Удалить информацию об этой ошибке"
+        (click)="onRemoveError()"
+      >
+        <mat-icon>error</mat-icon>
+      </button>
+      }
+    </div>
+    @if (currTest.titleDePl) {
+    <h2 class="plural">(die {{ currTest.titleDePl }})</h2>
+    } @if(currTest.pastForm) {
+    <p class="row past">
+      {{ currTest.pastForm }}
+    </p>
+    }
+  </div>
+  <div class="row stretch">
+    @for (word of currTest.testWords; track word; let index = $index) {
+    <app-word-option
+      [word]="word"
+      [index]="index + 1"
+      (mistake)="onMistake($event)"
+      (correct)="onCorrectAntwort()"
+    ></app-word-option>
+    }
+  </div>
+
+  @if (isButtonVisible) {
+  <button
+    class="actions"
+    mat-raised-button
+    color="primary"
+    type="button"
+    (click)="onNext()"
+  >
+    Дальше
+  </button>
+
+  <p class="example" [innerHTML]="currTest.exampleUsage"></p>
+  } }
+</div>

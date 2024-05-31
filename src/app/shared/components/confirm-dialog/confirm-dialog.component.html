@@ -1,0 +1,32 @@
+<div class="dialog__container">
+  <button class="dialog__close-btn" (click)="onClose()">
+    <mat-icon fontIcon="close"></mat-icon>
+  </button>
+  @if (data.title) {
+    <h1
+      mat-dialog-title
+      [innerHTML]="data.title"
+      [class.red]="data.confirmButtonColor === 'warn'"
+    ></h1>
+  }
+  @if (data.text) {
+    <div
+      mat-dialog-content
+      class="dialog__message"
+      [innerHTML]="data.text"
+    ></div>
+  }
+  <div mat-dialog-actions class="dialog__actions">
+    <button mat-raised-button (click)="onClose()">
+      {{ data.unConfirmButton || 'Отмена' }}
+    </button>
+    <button
+      mat-raised-button
+      [color]="data.confirmButtonColor || ''"
+      cdkFocusInitial
+      (click)="onClose(true)"
+    >
+      {{ data.confirmButton || 'Да' }}
+    </button>
+  </div>
+</div>

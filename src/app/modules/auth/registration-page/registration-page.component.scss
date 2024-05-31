@@ -1,0 +1,32 @@
+@import "../../../../assets/scss/variables.scss";
+
+h1 {
+  margin-bottom: 25px;
+  text-align: center;
+}
+
+form {
+  min-width: 350px;
+  max-width: 350px;
+  width: 100%;
+}
+
+.form-field {
+  width: 100%;
+  margin-bottom: 17px;
+}
+
+button[type="submit"] {
+  display: block;
+  margin: auto;
+  margin-bottom: 15px;
+  margin-top: -10px;
+}
+
+a {
+  margin-left: 10px;
+}
+
+p {
+  text-align: center;
+}
