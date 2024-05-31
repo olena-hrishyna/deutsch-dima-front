@@ -44,7 +44,7 @@ export class LoginPageComponent {
     private authService: AuthService,
     private matDialog: MatDialog
   ) {
-    this.title.setTitle('Логин');
+    this.title.setTitle('Логін');
     this.form = this.fb.group({
       login: ['', [Validators.required]],
       password: ['', [Validators.required]],
@@ -76,7 +76,7 @@ export class LoginPageComponent {
             disableClose: true,
             panelClass: 'my-dialog',
             data: {
-              title: err?.error?.message || 'Что-то пошло не так',
+              title: err?.error?.message || 'Щось пішло не так',
               confirmButtonColor: 'warn',
             },
           });

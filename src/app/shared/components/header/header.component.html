@@ -1,25 +1,25 @@
 <mat-toolbar class="full" color="primary">
   @if (currentUser) {
   <a routerLink="/vocabulary-trainer" routerLinkActive="active"
-    >Словарный тренажер</a
+    >Словниковий тренажер</a
   >
   @if(currentUser.isAdmin || currentUser.isSuperAdmin) {
   <a routerLink="/word-editor/add-word" routerLinkActive="active"
-    >Добавить слово</a
+    >Додати слово</a
   >
   }
   <a routerLink="/word-editor/word-list" routerLinkActive="active"
-    >Список слов</a
+    >Список слів</a
   >
   <div class="right">
     <button
       routerLink="/auth/account"
       mat-icon-button
-      matTooltip="Личный кабинет"
+      matTooltip="Особистий кабінет"
     >
       <mat-icon>manage_accounts</mat-icon>
     </button>
-    <button mat-icon-button (click)="onLogout()" [matTooltip]="'Выйти'">
+    <button mat-icon-button (click)="onLogout()" [matTooltip]="'Вийти'">
       <mat-icon>logout</mat-icon>
     </button>
   </div>
@@ -49,11 +49,11 @@
     <button
       routerLink="/auth/account"
       mat-icon-button
-      matTooltip="Личный кабинет"
+      matTooltip="Особистий кабінет"
     >
       <mat-icon>manage_accounts</mat-icon>
     </button>
-    <button mat-icon-button (click)="onLogout()" [matTooltip]="'Выйти'">
+    <button mat-icon-button (click)="onLogout()" [matTooltip]="'Вийти'">
       <mat-icon>logout</mat-icon>
     </button>
   </div>
@@ -63,7 +63,7 @@
       routerLink="/vocabulary-trainer"
       routerLinkActive="active"
     >
-      <span>Словарный тренажер</span>
+      <span>Словниковий тренажер</span>
     </button>
     @if(currentUser.isAdmin || currentUser.isSuperAdmin) {
     <button
@@ -71,7 +71,7 @@
       routerLink="/word-editor/add-word"
       routerLinkActive="active"
     >
-      <span>Добавить слово</span>
+      <span>Додати слово</span>
     </button>
     }
     <button
@@ -79,7 +79,7 @@
       routerLink="/word-editor/word-list"
       routerLinkActive="active"
     >
-      <span>Список слов</span>
+      <span>Список слів</span>
     </button>
   </mat-menu>
   } @else {

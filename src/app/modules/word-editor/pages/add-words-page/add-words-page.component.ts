@@ -97,7 +97,7 @@ export class AddWordsPageComponent {
     this.isEditMode = !!edidingWordId;
 
     this.currentTitle = `${
-      this.isEditMode ? 'Редактировать' : 'Добавить новое'
+      this.isEditMode ? 'Редагувати' : 'Додати нове'
     } слово`;
 
     this.title.setTitle(this.currentTitle);
@@ -244,7 +244,7 @@ export class AddWordsPageComponent {
       .pipe(
         catchError((err) => {
           this.openSnackBar(
-            err?.error?.error || 'Ошибка сохранения слова',
+            err?.error?.error || 'Помилка збереження слова',
             true
           );
           this.isLoading = false;
@@ -252,7 +252,7 @@ export class AddWordsPageComponent {
         })
       )
       .subscribe((word) => {
-        this.openSnackBar('Слово сохранено успешно');
+        this.openSnackBar('Слово збережено успішно');
         this.isLoading = false;
 
         if (!this.isEditMode) {
@@ -279,13 +279,13 @@ export class AddWordsPageComponent {
         .pipe(
           catchError((err) => {
             this.isLoading = false;
-            this.openSnackBar(err?.error?.message || 'Что-то пошло не так', true);
+            this.openSnackBar(err?.error?.message || 'Щось пішло не так', true);
             return throwError(() => err);
           })
         )
         .subscribe(() => {
           this.isLoading = false;
-          this.openSnackBar('Слово добавленно в список тренировки');
+          this.openSnackBar('Слово додано до списку тренування');
         });
     }
   }
@@ -301,10 +301,10 @@ export class AddWordsPageComponent {
   onDeleteWord(): void {
     const data: IDialogData = {
       confirmButtonColor: 'warn',
-      title: 'Удаление слова',
-      text: 'Вы уверены, что хотите навсегда удалить это слово',
-      confirmButton: 'Удалить',
-      unConfirmButton: 'Отменить',
+      title: 'Видалення слова',
+      text: 'Ви впевнені, що хочете видалити це слово назавжди',
+      confirmButton: 'Видалити',
+      unConfirmButton: 'Відмінити',
     };
     this.matDialog
       .open(ConfirmDialogComponent, {
@@ -322,7 +322,7 @@ export class AddWordsPageComponent {
           return confirm && id ? this.wordsService.deleteWord(id) : of(null);
         }),
         catchError((err) => {
-          this.openSnackBar('Ошибка удадения слова', true);
+          this.openSnackBar('Помилка вилучення слова', true);
           this.isLoading = false;
           return throwError(() => err);
         })
@@ -330,7 +330,7 @@ export class AddWordsPageComponent {
       .subscribe((id: { wordId: string } | null) => {
         this.isLoading = false;
         if (id) {
-          this.openSnackBar('Слово удалено');
+          this.openSnackBar('Слово видалено');
           this.router.navigate(['/word-editor/word-list']);
         }
       });

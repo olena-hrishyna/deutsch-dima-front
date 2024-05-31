@@ -107,7 +107,7 @@ export class TrainerPageComponent {
     private snackBar: MatSnackBar,
     private matDialog: MatDialog
   ) {
-    this.title.setTitle('Словарный тренажер');
+    this.title.setTitle('Словниковий тренажер');
     this.limit = getLocalStorage(LIMIT_TRAINING_KEY) || 5;
     this.pageSize =
       getLocalStorage(PAGE_TRAINING_SIZE_KEY) || this.pageSizeOptions[2];
@@ -219,7 +219,7 @@ export class TrainerPageComponent {
       .getAllRelevantTraining(params)
       .pipe(
         catchError((err) => {
-          this.openSnackBar('Ошибка получения тренингов', 5000, true);
+          this.openSnackBar('Помилка отримання тренінгів', 5000, true);
           this.isLoading = false;
           return throwError(() => err);
         })
@@ -246,7 +246,7 @@ export class TrainerPageComponent {
       .pipe(
         catchError((err) => {
           this.openSnackBar(
-            'Ошибка получения списка всех тренингов',
+            'Помилка отримання списку всіх тренінгів',
             5000,
             true
           );
@@ -290,31 +290,31 @@ export class TrainerPageComponent {
 
     switch (++level) {
       case 2:
-        repeat = 'через 3 дня';
+        repeat = 'через 3 дні';
         break;
       case 3:
-        repeat = 'через 7 дней';
+        repeat = 'через 7 днів';
         break;
       case 4:
-        repeat = 'через 14 дней';
+        repeat = 'через 14 днів';
         break;
       case 5:
-        repeat = 'через 30 дней';
+        repeat = 'через 30 днів';
         break;
       case 6:
-        repeat = 'через 60 дней';
+        repeat = 'через 60 днів';
         break;
       case 7:
-        repeat = 'через 90 дней';
+        repeat = 'через 90 днів';
         break;
       case 8:
-        repeat = 'через 180 дней';
+        repeat = 'через 180 днів';
         break;
       case 9:
-        repeat = 'через 360 дней';
+        repeat = 'через 360 днів';
         break;
       case 10:
-        repeat = 'слово изучено ❤️';
+        repeat = 'слово вивчене ❤️';
         break;
     }
 
@@ -335,7 +335,6 @@ export class TrainerPageComponent {
     });
     const mixWords = mixArray(words);
 
-    // удаляем лишнее количество вариантов
     while (mixWords.length > 4) {
       const randomIndex = getRandomIndex(words);
 
@@ -349,11 +348,11 @@ export class TrainerPageComponent {
 
   getSubtitle(count: number, isSecont = false): string {
     const c = Number(String(count).slice(-1));
-    const word = (c === 1 && 'слово') || (c > 1 && c < 5 && 'слова') || 'слов';
+    const word = (c === 1 && 'слово') || (c > 1 && c < 5 && 'слова') || 'слів';
 
     return isSecont
-      ? `Всего ${count} ${word} в активной тренировке${count ? ':' : '.'}`
-      : `${count} ${word} нужно повторить сегодня.`;
+      ? `Усього ${count} ${word} в активному тренуванні${count ? ':' : '.'}`
+      : `${count} ${word} потрібно повторити сьогодні.`;
   }
 
   onLiminChange(limit: LIMIT): void {
@@ -423,10 +422,10 @@ export class TrainerPageComponent {
   onDeleteTraining(trainingId: string): void {
     const data: IDialogData = {
       confirmButtonColor: 'warn',
-      title: 'Удаление тренировки',
-      text: 'Вы уверены, что хотите навсегда удалить тренировку этого слова? Вы сможете добавить его снова, но прогресс не сохранится',
-      confirmButton: 'Удалить',
-      unConfirmButton: 'Отменить',
+      title: 'Видалення тренування',
+      text: 'Ви впевнені, що хочете видалити назавжди тренування цього слова? Ви зможете додати його знову, але прогрес не збережеться',
+      confirmButton: 'Видалити',
+      unConfirmButton: 'Відмінити',
     };
     this.matDialog
       .open(ConfirmDialogComponent, {
@@ -444,7 +443,7 @@ export class TrainerPageComponent {
             : of(null);
         }),
         catchError((err) => {
-          this.openSnackBar('Ошибка удадения тренинга', 5000, true);
+          this.openSnackBar('Помилка удачі тренінгу', 5000, true);
           this.isLoading = false;
           return throwError(() => err);
         })
@@ -452,7 +451,7 @@ export class TrainerPageComponent {
       .subscribe((trainingId: string | null) => {
         this.isLoading = false;
         if (trainingId) {
-          this.openSnackBar('Слово удалено из тренировки', 6000);
+          this.openSnackBar('Слово видалено з тренування', 6000);
           this.getRelevantTrainings();
           this.allTrainings = this.allTrainings.filter(
             (el) => el._id !== trainingId
@@ -473,7 +472,7 @@ export class TrainerPageComponent {
         catchError((err) => {
           this.isLoading = false;
           this.openSnackBar(
-            err?.error?.message || 'Что-то пошло не так',
+            err?.error?.message || 'Щось пішло не так',
             5000,
             true
           );
@@ -497,10 +496,10 @@ export class TrainerPageComponent {
   onClearTrainings(): void {
     const data: IDialogData = {
       confirmButtonColor: 'warn',
-      title: 'Удаление ВСЕХ ваших тренировок',
-      text: 'Вы уверены, что хотите навсегда удалить все ваши тренировки? Вы сможете добавить слова снова, но прогресс не сохранится',
-      confirmButton: 'Удалить',
-      unConfirmButton: 'Отменить',
+      title: 'Видалення ВСІХ ваших тренувань',
+      text: 'Ви впевнені, що хочете назавжди видалити усі ваші тренування? Ви зможете додати слова знову, але прогрес не збережеться',
+      confirmButton: 'Видалити',
+      unConfirmButton: 'Відмінити',
     };
     this.matDialog
       .open(ConfirmDialogComponent, {
@@ -518,7 +517,7 @@ export class TrainerPageComponent {
             : of(null);
         }),
         catchError((err) => {
-          this.openSnackBar('Ошибка удаления тренировок', 5000, true);
+          this.openSnackBar('Помилка видалення тренувань', 5000, true);
           this.isLoading = false;
           return throwError(() => err);
         })
@@ -531,7 +530,7 @@ export class TrainerPageComponent {
           this.totalRelevCount = 0;
           this.totalCount = 0;
           this.openSnackBar(
-            resp.message || 'Все тренировки удалены успешно',
+            resp.message || 'Усі тренування видалені успішно',
             6000
           );
         }
@@ -568,7 +567,7 @@ export class TrainerPageComponent {
           }),
           catchError((err) => {
             this.openSnackBar(
-              err?.error?.message || 'Что-то пошло не так',
+              err?.error?.message || 'Щось пішло не так',
               5000,
               true
             );

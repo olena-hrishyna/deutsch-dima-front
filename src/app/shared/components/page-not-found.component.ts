@@ -14,7 +14,7 @@ import { RouterLink } from '@angular/router';
     <mat-icon class="big">sentiment_very_dissatisfied</mat-icon>
     <a class="link" [routerLink]="historyService.previousUrl || '/'">
       <button>
-        Вернуться назад
+        Повернутися назад
         <mat-icon class="follow">follow_the_signs</mat-icon>
       </button>
     </a>
@@ -46,7 +46,7 @@ import { RouterLink } from '@angular/router';
   }`,
 })
 export class PageNotFoundComponent {
-  currentTitle = 'Страница не найдена';
+  currentTitle = 'Сторінка не знайдена';
 
   constructor(
     private title: Title,

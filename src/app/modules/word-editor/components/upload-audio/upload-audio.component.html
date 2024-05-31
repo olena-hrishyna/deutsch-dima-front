@@ -1,8 +1,8 @@
 <div class="column">
   @if (word?.audio) {
-    <button class="delete" (click)="onDeleteAudio()">Удалить аудио</button>
+    <button class="delete" (click)="onDeleteAudio()">Видалити аудіо</button>
   } @else {
     <input type="file" (change)="onFileChange($event)" />
-    <button (click)="onUploadAudio()">Сохранить аудио</button>
+    <button (click)="onUploadAudio()">Зберегти аудіо</button>
   }
 </div>

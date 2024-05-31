@@ -2,7 +2,7 @@
   <h1 class="login__title">Войти</h1>
   <form [formGroup]="form" novalidate="" (ngSubmit)="onSubmit()">
     <mat-form-field class="form-field">
-      <mat-label>Ваш логин</mat-label>
+      <mat-label>Ваш логін</mat-label>
       <input matInput formControlName="login" />
     </mat-form-field>
 
@@ -32,10 +32,10 @@
       type="submit"
       [disabled]="form.invalid || isLoading"
     >
-      Войти
+      Увійти
     </button>
   </form>
-  <p>Нет учетной записи?<a routerLink="/auth/registr">Зарегистрироваться</a></p>
+  <p>Немає облікового запису?<a routerLink="/auth/registr">Зареєструватись</a></p>
 </main>
 
 @if (isLoading) {

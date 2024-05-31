@@ -48,7 +48,7 @@ export class AccountPageComponent {
     private snackBar: MatSnackBar,
     private matDialog: MatDialog
   ) {
-    this.title.setTitle('Личный кабинет');
+    this.title.setTitle('Особистий кабінет');
     this.form = this.fb.group({
       login: '',
       password: '',
@@ -89,9 +89,9 @@ export class AccountPageComponent {
     }
     const data: IDialogData = {
       confirmButtonColor: 'warn',
-      title: 'Сохранить изменения?',
-      confirmButton: 'Сохранить',
-      unConfirmButton: 'Отменить',
+      title: 'Зберегти зміни?',
+      confirmButton: 'Зберегти',
+      unConfirmButton: 'Відмінити',
     };
 
     this.matDialog
@@ -113,7 +113,7 @@ export class AccountPageComponent {
         catchError((err) => {
           this.isLoading = false;
           this.openSnackBar(
-            err?.error?.message || 'Что-то пошло не так',
+            err?.error?.message || 'Щось пішло не так',
             5000,
             true
           );
@@ -126,7 +126,7 @@ export class AccountPageComponent {
           this.authService.setUserData(data);
           this.onEdit(false);
           this.isLoading = false;
-          this.openSnackBar('Изменения сохранены', 5000);
+          this.openSnackBar('Зміни збережені', 5000);
         }
       });
   }
@@ -134,10 +134,10 @@ export class AccountPageComponent {
   onDeleteAccount(): void {
     const data: IDialogData = {
       confirmButtonColor: 'warn',
-      title: 'Удаление аккаунта',
-      text: 'Вы уверены, что хотите навсегда удалить удалить ваш аккаутн? Восстановление аккаунта будет невозможно',
-      confirmButton: 'Удалить',
-      unConfirmButton: 'Отменить',
+      title: 'Видалення акаунта',
+      text: 'Ви впевнені, що хочете видалити видалити ваш обліковий запис назавжди? Відновлення облікового запису буде неможливо',
+      confirmButton: 'Видалити',
+      unConfirmButton: 'Відмінити',
     };
     this.matDialog
       .open(ConfirmDialogComponent, {
@@ -153,7 +153,7 @@ export class AccountPageComponent {
           return confirm ? this.authService.deleteMyAccount() : of(null);
         }),
         catchError((err) => {
-          this.openSnackBar('Ошибка удаления аккаунта', 5000, true);
+          this.openSnackBar('Помилка видалення облікового запису', 5000, true);
           this.isLoading = false;
           return throwError(() => err);
         })

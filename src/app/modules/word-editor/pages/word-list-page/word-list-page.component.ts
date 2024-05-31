@@ -92,7 +92,7 @@ export class WordListPageComponent {
     private router: Router,
     private route: ActivatedRoute
   ) {
-    this.title.setTitle('Список слов');
+    this.title.setTitle('Список слів');
     this.searchDe = this.route.snapshot.queryParams['searchDe'] || '';
     this.searchRu = this.route.snapshot.queryParams['searchRu'] || '';
     this.pageSize =
@@ -128,8 +128,8 @@ export class WordListPageComponent {
       case 'delete':
         const data: IDialogData = {
           confirmButtonColor: 'warn',
-          title: 'Удалить слово?',
-          confirmButton: 'Удалить',
+          title: 'Видалити слово?',
+          confirmButton: 'Видалити',
         };
 
         this.matDialog
@@ -147,14 +147,14 @@ export class WordListPageComponent {
               return this.wordsService.deleteWord(wordId);
             }),
             catchError((err) => {
-              this.openSnackBar('Ошибка удаления слова', true);
+              this.openSnackBar('Помилка видалення слова', true);
               this.isLoading = false;
               return throwError(() => err);
             })
           )
           .subscribe(() => {
             this.isLoading = false;
-            this.openSnackBar('Слово удалено');
+            this.openSnackBar('Слово видалено');
             this.wordList = this.wordList.filter((el) => el._id !== wordId);
             --this.totalCount;
           });
@@ -167,7 +167,7 @@ export class WordListPageComponent {
             catchError((err) => {
               this.isLoading = false;
               this.openSnackBar(
-                err?.error?.message || 'Ошибка добавления слова в тренировки',
+                err?.error?.message || 'Помилка додавання слова до тренування',
                 true
               );
               return throwError(() => err);
@@ -175,7 +175,7 @@ export class WordListPageComponent {
           )
           .subscribe(() => {
             this.isLoading = false;
-            this.openSnackBar('Слово добавленно в список тренировки');
+            this.openSnackBar('Слово додано до списку тренування');
             this.wordList = this.wordList.map((el) =>
               el._id !== wordId ? el : { ...el, isInTraining: true }
             );
@@ -190,7 +190,7 @@ export class WordListPageComponent {
               this.isLoading = false;
               this.openSnackBar(
                 err?.error?.message ||
-                  'Ошибка добавления слова в известные вам',
+                  'Помилка додавання слова у відомі вам',
                 true
               );
               return throwError(() => err);
@@ -198,7 +198,7 @@ export class WordListPageComponent {
           )
           .subscribe(() => {
             this.isLoading = false;
-            this.openSnackBar('Слово помечено как уже известное вам');
+            this.openSnackBar('Слово позначене як вже відоме вам');
             this.wordList = this.wordList.map((el) =>
               el._id !== wordId ? el : { ...el, isKnown: true }
             );
@@ -212,7 +212,7 @@ export class WordListPageComponent {
             catchError((err) => {
               this.isLoading = false;
               this.openSnackBar(
-                err?.error?.message || 'Ошибка удаления слова из известных',
+                err?.error?.message || 'Помилка видалення слова з відомих',
                 true
               );
               return throwError(() => err);
@@ -220,7 +220,7 @@ export class WordListPageComponent {
           )
           .subscribe(() => {
             this.isLoading = false;
-            this.openSnackBar('Слово удалено из уже известных вам');
+            this.openSnackBar('Слово видалено з уже відомих вам');
             this.wordList = this.wordList.map((el) =>
               el._id !== wordId ? el : { ...el, isKnown: false }
             );
@@ -261,7 +261,7 @@ export class WordListPageComponent {
       .getWordList(params)
       .pipe(
         catchError((err) => {
-          this.openSnackBar('Ошибка получения слов', true);
+          this.openSnackBar('Помилка отримання слів', true);
           this.isLoading = false;
           return throwError(() => err);
         })

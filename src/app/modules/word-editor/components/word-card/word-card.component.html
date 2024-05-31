@@ -34,7 +34,7 @@
       <button
         class="known"
         matTooltipPosition="right"
-        matTooltip="Добавить слово в известные вам"
+        matTooltip="Додати слово у відомі вам"
         (click)="onAction($event, 'add-known')"
       >
         <mat-icon color="accent">school</mat-icon>
@@ -43,7 +43,7 @@
       <button
         class="known"
         matTooltipPosition="right"
-        matTooltip="Удалить слово из известных вам"
+        matTooltip="Видалити слово з відомих вам"
         (click)="onAction($event, 'remove-known')"
       >
         <mat-icon color="accent">check_circle</mat-icon>
@@ -56,7 +56,7 @@
       @if(!word?.isInTraining) {
       <button
         matTooltipPosition="right"
-        matTooltip="Добавить слово к тренировке"
+        matTooltip="Додати слово до тренування"
         (click)="onAction($event, 'add')"
       >
         <mat-icon color="accent">add_circle</mat-icon>
@@ -64,7 +64,7 @@
       } @if (isSuperAdmin) {
       <button
         matTooltipPosition="right"
-        matTooltip="Удалить слово навсегда из базы данных"
+        matTooltip="Видалити слово назавжди з бази даних"
         (click)="onAction($event, 'delete')"
       >
         <mat-icon color="warn">delete</mat-icon>

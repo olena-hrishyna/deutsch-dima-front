@@ -48,7 +48,7 @@ export class RegistrationPageComponent {
     private authService: AuthService,
     private matDialog: MatDialog
   ) {
-    this.title.setTitle('Регистрация');
+    this.title.setTitle('Реєстрація');
 
     this.form = this.fb.group({
       login: [null, [Validators.required]],
@@ -84,7 +84,7 @@ export class RegistrationPageComponent {
             width: '400px',
             panelClass: 'my-dialog',
             data: {
-              title: err?.error?.message || 'Что-то пошло не так',
+              title: err?.error?.message || 'Щось пішло не так',
               confirmButtonColor: 'warn',
             },
           });

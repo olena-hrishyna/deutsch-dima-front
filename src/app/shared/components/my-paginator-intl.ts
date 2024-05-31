@@ -3,18 +3,18 @@ import { Injectable } from '@angular/core';
 
 @Injectable()
 export class MyPaginatorIntl extends MatPaginatorIntl {
-  public override itemsPerPageLabel = 'Слов на странице:';
-  public override nextPageLabel = 'Следующая страница';
-  public override previousPageLabel = 'Предыдущая страница';
-  public override firstPageLabel = 'Первая страница';
-  public override lastPageLabel = 'Последняя страница';
+  public override itemsPerPageLabel = 'Слів на сторінці:';
+  public override nextPageLabel = 'Наступна сторінка';
+  public override previousPageLabel = 'Попередня сторінка';
+  public override firstPageLabel = 'Перша сторінка';
+  public override lastPageLabel = 'Остання сторінка';
   public override getRangeLabel = function (
     page: number,
     pageSize: number,
     length: number
   ): string {
     if (length === 0 || pageSize === 0) {
-      return `0 из ${length}`;
+      return `0 з ${length}`;
     }
 
     length = Math.max(length, 0);
@@ -25,6 +25,6 @@ export class MyPaginatorIntl extends MatPaginatorIntl {
         ? Math.min(startIndex + pageSize, length)
         : startIndex + pageSize;
 
-    return `${startIndex + 1} – ${endIndex} из ${length}`;
+    return `${startIndex + 1} – ${endIndex} з ${length}`;
   };
 }

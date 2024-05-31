@@ -50,27 +50,27 @@ export const PART_OF_SPEECH_TRANSLATIONS: Translations = {
   Noun: {
     en: 'Noun',
     de: 'Substantiv',
-    ru: 'Существительное',
+    ru: 'Іменник',
   },
   Verb: {
     en: 'Verb',
     de: 'Verb',
-    ru: 'Глагол',
+    ru: 'Дієслово',
   },
   Adjective: {
     en: 'Adjective',
     de: 'Adjektiv',
-    ru: 'Прилагательное',
+    ru: 'Прикметник',
   },
   Adverb: {
     en: 'Adverb',
     de: 'Adverb',
-    ru: 'Наречие',
+    ru: 'Прислівник',
   },
   Preposition: {
     en: 'Preposition',
     de: 'Präposition',
-    ru: 'Предлог',
+    ru: 'Прийменник',
   },
   Conjunction: {
     en: 'Conjunction',
@@ -80,7 +80,7 @@ export const PART_OF_SPEECH_TRANSLATIONS: Translations = {
   Interjection: {
     en: 'Interjection',
     de: 'Interjektion',
-    ru: 'Междометие',
+    ru: 'Вигук',
   },
   Phrase: {
     en: 'Phrase',

@@ -1,6 +1,6 @@
 <main>
   <div class="row">
-    <h1 class="login__title">Личный кабинет</h1>
+    <h1 class="login__title">Особистий кабінет</h1>
     @if (!isEditMode) {
     <button
       class="edit-btn"
@@ -17,7 +17,7 @@
 
   <form [formGroup]="form" novalidate="" (ngSubmit)="onSubmit()">
     <mat-form-field class="form-field">
-      <mat-label>Логин</mat-label>
+      <mat-label>Логін</mat-label>
       <input matInput formControlName="login" />
     </mat-form-field>
 
@@ -29,7 +29,7 @@
     @if (isEditMode) {
     <div class="actions row">
       <button mat-raised-button type="button" (click)="onEdit(false)">
-        Отменить изменения
+        Відмінити зміни
       </button>
       <button
         mat-raised-button
@@ -37,7 +37,7 @@
         type="submit"
         [disabled]="form.invalid || isLoading"
       >
-        Сохранить изменения
+        Зберегти зміни
       </button>
     </div>
     }
@@ -48,7 +48,7 @@
     color="warn"
     (click)="onDeleteAccount()"
   >
-    Удалить аккаунт
+    Видалити акаунт
   </button>
 </main>
 

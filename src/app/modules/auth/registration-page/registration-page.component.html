@@ -2,7 +2,7 @@
   <h1>{{ currentTitle }}</h1>
   <form [formGroup]="form" (ngSubmit)="onSubmit()">
     <mat-form-field class="form-field">
-      <mat-label>Логин</mat-label>
+      <mat-label>Логін</mat-label>
       <input
         matInput
         #login
@@ -37,10 +37,10 @@
       type="submit"
       [disabled]="form.invalid || isLoading"
     >
-      Регистрация
+    Реєстрація
     </button>
   </form>
-  <p>Уже есть аккаунт?<a routerLink="/auth/login">Войти</a></p>
+  <p>Вже є обліковий запис?<a routerLink="/auth/login">Увійти</a></p>
 </main>
 
 @if (isLoading) {

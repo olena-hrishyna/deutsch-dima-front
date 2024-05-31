@@ -48,7 +48,7 @@ export class UploadAudioComponent {
         .pipe(
           catchError((err) => {
             this.openSnackBar(
-              err?.error?.message || 'Ошибка сохранения аудио',
+              err?.error?.message || 'Помилка збереження аудіо',
               5000,
               true
             );
@@ -57,7 +57,7 @@ export class UploadAudioComponent {
         )
         .subscribe((word: IWord) => {
           this.updatedWord.emit(word);
-          this.openSnackBar('Аудио сохранено');
+          this.openSnackBar('Аудіо збережено');
         });
     }
   }

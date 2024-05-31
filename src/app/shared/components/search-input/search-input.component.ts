@@ -36,7 +36,7 @@ export class SearchInputComponent implements OnInit, OnDestroy {
   @Input() isBorder = false;
   @Input() isBackground = true;
   @Input() isLoading = false;
-  @Input() placeholder = 'Поиск';
+  @Input() placeholder = 'Пошук';
   @Input() set query(query: string) {
     this.searchControl.setValue(query || '');
   }

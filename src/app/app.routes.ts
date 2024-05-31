@@ -2,7 +2,6 @@ import { Routes } from '@angular/router';
 import { PageNotFoundComponent } from './shared/components/page-not-found.component';
 import { AuthGuard } from './guards/auth.guard';
 import { WelcomePageComponent } from './shared/components/welcome-page/welcome-page.component';
-import { AdminGuard } from './guards/admin.guard';
 
 export const routes: Routes = [
   {

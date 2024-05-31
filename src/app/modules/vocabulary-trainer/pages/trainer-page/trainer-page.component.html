@@ -6,7 +6,7 @@
   color="accent"
   mat-icon-button
   (click)="onCancelTraining()"
-  matTooltip="Отменить тренировку"
+  matTooltip="Скасувати тренування"
 >
   <mat-icon>cancel</mat-icon>
 </button>
@@ -16,13 +16,13 @@
   color="warn"
   mat-icon-button
   (click)="onClearTrainings()"
-  matTooltip="Очистить весь список тренировок"
+  matTooltip="Очистити весь список тренувань"
 >
   <mat-icon>folder_delete</mat-icon>
 </button>
 }
 
-<h1>Словарный тренажер</h1>
+<h1>Словниковий тренажер</h1>
 } @switch (step) { @case (0) { @if (totalRelevCount) {
 <h3>{{ subtitle }}</h3>
 <mat-button-toggle-group
@@ -47,20 +47,19 @@
   mat-raised-button
   (click)="onStart()"
 >
-  Начать тренировку
+Розпочати тренування
 </button>
 } @if (isAllWordLoading) {
 <mat-spinner></mat-spinner>
 } @else { @if (totalCount && !totalRelevCount) {
 <h4>
-  На сегодня все слова повторены. <br />Можно добавить еще слова для тренировки
-  на странице
-  <a routerLink="/word-editor/word-list">списка слов</a>
+  На сьогодні всі слова повторені. <br />Можна додати ще слова для тренування на сторінці
+  <a routerLink="/word-editor/word-list">списку слів</a>
 </h4>
 } @if (!totalCount) {
 <h4>
   В вашем тренажере нет слов для тренировке. <br />Добавьте их на странице
-  <a routerLink="/word-editor/word-list">списка слов</a>
+  <a routerLink="/word-editor/word-list">списку слів</a>
 </h4>
 } @else {
 <h3>{{ getSubtitle(totalCount, true) }}</h3>
@@ -85,7 +84,7 @@
       <span
         [matTooltip]="
           isSuperAdmin || isAdmin
-            ? 'Перейти к редактированию данного слова'
+            ? 'Перейти до редагування цього слова'
             : ''
         "
         class="title m-r"
@@ -108,7 +107,7 @@
       class="delete small-icon-button"
       mat-icon-button
       color="warn"
-      matTooltip="Удалить тренировку этого слова"
+      matTooltip="Видалити тренування цього слова"
       (click)="onDeleteTraining(training._id)"
     >
       <mat-icon>delete_forever</mat-icon>
@@ -118,7 +117,7 @@
       class="add small-icon-button"
       mat-icon-button
       color="accent"
-      matTooltip="Сбросить прогресс тренировки этого слова"
+      matTooltip="Скинути прогрес тренування цього слова"
       (click)="onDateUpdate(training._id)"
     >
       <mat-icon>restart_alt</mat-icon>
@@ -167,7 +166,7 @@
 ></app-step-3>
 } @case (5) {
 
-<h3>Слова без ошибок ({{ correctTrainings.length }}):</h3>
+<h3>Слова без помилок ({{ correctTrainings.length }}):</h3>
 <div class="column left">
   @for (training of correctTrainings; track training._id; let last = $last) {
   <div class="row">
@@ -188,7 +187,7 @@
     <button
       mat-icon-button
       color="accent"
-      matTooltip="Добавить слово в повторение завтра"
+      matTooltip="Додати слово у повторення завтра"
       matTooltipPosition="right"
       (click)="onChangeError(training._id, 'add')"
     >
@@ -200,7 +199,7 @@
   } }
 </div>
 
-<h3>Слова с ошибками ({{ mistakeTrainings.length }}):</h3>
+<h3>Слова з помилками ({{ mistakeTrainings.length }}):</h3>
 <div class="column left">
   @for (training of mistakeTrainings; track training._id) {
   <div class="row">
@@ -221,7 +220,7 @@
     <button
       mat-icon-button
       color="warn"
-      matTooltip="Удалить информацию об этой ошибке"
+      matTooltip="Видалити інформацію про цю помилку"
       matTooltipPosition="right"
       (click)="onChangeError(training._id, 'remove')"
     >
@@ -237,6 +236,6 @@
   mat-raised-button
   (click)="onSave()"
 >
-  Сохранить результаты тренировки
+  Зберегти результати тренування
 </button>
 } } }

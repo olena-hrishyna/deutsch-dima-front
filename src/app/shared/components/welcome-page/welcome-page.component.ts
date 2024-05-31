@@ -7,12 +7,12 @@ import { AuthService } from '../../../services/auth.service';
   standalone: true,
   template: `<main>
     @if(currentUser) {
-    <h1>Добро пожаловать!</h1>
+    <h1>Ласкаво просимо!</h1>
     } @else {
-    <h1>Внимание!</h1>
+    <h1>Увага!</h1>
     <h3>
-      Данный веб-сайт создан для изучения немецкого языка,<br />и право пользования
-      им предоставлено только зарегистрированным пользователям<br />
+      Даний веб-сайт створений для вивчення німецької мови,<br />і право
+      користування їм надано лише зареєстрованим користувачам<br />
     </h3>
     }
   </main>`,
@@ -31,6 +31,6 @@ export class WelcomePageComponent {
   currentUser = this.authService.getUserData().user;
 
   constructor(private title: Title, private authService: AuthService) {
-    this.title.setTitle('Добро пожаловать!');
+    this.title.setTitle('Ласкаво просимо!');
   }
 }

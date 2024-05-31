@@ -61,7 +61,7 @@
         [ngClass]="{ active: isReflexivVerb }"
         (click)="onReflexivVerb()"
       >
-        sich (возвратный / reflexiv)
+        sich (зворотний / reflexiv)
       </button>
       <div class="row">
         <div class="column shift">
@@ -71,7 +71,7 @@
             [ngClass]="{ active: isTrennbareVerben }"
             (click)="onTrennbareVerben(true)"
           >
-            Отделяемый
+            Відокремлюваний
           </button>
           <button
             class="prefix2"
@@ -79,11 +79,11 @@
             [ngClass]="{ active: !isTrennbareVerben }"
             (click)="onTrennbareVerben(false)"
           >
-            Неотделяемый
+            Невідокремлюваний
           </button>
         </div>
         <mat-form-field class="form-field smal">
-          <mat-label>Префикс</mat-label>
+          <mat-label>Префікс</mat-label>
           <input matInput type="text" formControlName="prefix" />
         </mat-form-field>
       </div>
@@ -104,16 +104,16 @@
             }
           </div>
           <mat-form-field class="form-field">
-            <mat-label>Женская форма</mat-label>
+            <mat-label>Жіноча форма</mat-label>
             <input matInput type="text" formControlName="feminin" />
           </mat-form-field>
           <mat-form-field class="form-field">
-            <mat-label>Множественное число</mat-label>
+            <mat-label>Множина</mat-label>
             <input matInput type="text" formControlName="titleDePl" />
           </mat-form-field>
           }
           <mat-form-field class="form-field">
-            <mat-label>Слово на немецком</mat-label>
+            <mat-label>Слово німецькою</mat-label>
             <input matInput type="text" formControlName="titleDe" />
           </mat-form-field>
         </div>
@@ -131,7 +131,7 @@
                   class="form-field bigger"
                   [ngClass]="{ lang: titleRuArray.controls.length === 1 }"
                 >
-                  <mat-label>Перевод на русский</mat-label>
+                  <mat-label>Переклад на українську</mat-label>
                   <input matInput type="text" formControlName="{{ i }}" />
                 </mat-form-field>
                 @if(titleRuArray.controls.length > 1) {
@@ -158,7 +158,7 @@
           </div>
 
           <mat-form-field class="form-field">
-            <mat-label>Пример использования</mat-label>
+            <mat-label>Приклад використання</mat-label>
             <textarea
               matInput
               rows="6"
@@ -256,7 +256,7 @@
       type="submit"
       [disabled]="isLoading"
     >
-      {{ isEditMode ? "Сохранить" : "Создать" }}
+      {{ isEditMode ? "Зберегти" : "Створити" }}
     </button>
 
     @if (isEditMode) {
@@ -267,31 +267,30 @@
       [disabled]="isLoading"
       (click)="onCancel()"
     >
-      Отменить
+      Відмінити
     </button>
     }
   </div>
 </form>
 
 <p class="row training" (click)="onAddToTraining()">
-  <mat-icon>add_circle</mat-icon>Добавить это слово мне в тренировку
+  <mat-icon>add_circle</mat-icon>Додати це слово мені у тренування
 </p>
 <p class="row new" routerLink="/word-editor/add-word">
-  <mat-icon>add_circle</mat-icon>Добавить новое слово
+  <mat-icon>add_circle</mat-icon>Додати нове слово
 </p>
 
 @if (edidingWord) {
-  <button
-    class="delete-word"
-    color="warn"
-    type="button"
-    matTooltip="Удалить слово"
-    mat-icon-button
-    (click)="onDeleteWord()"
-  >
-    <mat-icon>delete</mat-icon>
-  </button>
-}
-@if (isLoading) {
+<button
+  class="delete-word"
+  color="warn"
+  type="button"
+  matTooltip="Видалити слово"
+  mat-icon-button
+  (click)="onDeleteWord()"
+>
+  <mat-icon>delete</mat-icon>
+</button>
+} @if (isLoading) {
 <app-loader></app-loader>
 }

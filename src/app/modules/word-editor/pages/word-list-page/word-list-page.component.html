@@ -2,21 +2,21 @@
   labelPosition="before"
   (change)="onShow($event.checked, true)"
   [checked]="isHideInTraning"
-  >Скрыть слова, которые уже добавленны в тренировку</mat-checkbox
+  >Приховати слова, які вже додані у тренування</mat-checkbox
 >
 <mat-checkbox
   class="second"
   labelPosition="before"
   (change)="onShow($event.checked)"
   [checked]="isHideKnown"
-  >Скрыть слова, которые вы уже знаете</mat-checkbox
+  >Приховати слова, які ви вже знаєте</mat-checkbox
 >
 
 <div class="statistic">
-  <p>Всего слов в словаре: <span>{{ allCount }}</span></p>
-  <p>Из них изучено слов: <span>{{ inKnownCount }}</span></p>
-  <p>Из них в процессе изучения: <span>{{ inTrainingCount }}</span></p>
-  <p>Еще не изучались: <span>{{ allCount - inKnownCount - inTrainingCount }}</span></p>
+  <p>Усього слів у словнику: <span>{{ allCount }}</span></p>
+  <p>З них вивчено слів: <span>{{ inKnownCount }}</span></p>
+  <p>З них у процесі вивчення: <span>{{ inTrainingCount }}</span></p>
+  <p>Ще не вивчалися: <span>{{ allCount - inKnownCount - inTrainingCount }}</span></p>
 </div>
 
 <button class="menu" mat-mini-fab color="accent" [matMenuTriggerFor]="menu">
@@ -25,19 +25,19 @@
 <mat-menu #menu="matMenu" [style.max-width]="'550px'">
   <button mat-menu-item (click)="onSort({ titleDe: 1 })">
     <mat-icon>arrow_downward</mat-icon>
-    <span>По алфавиту (по возрастанию)</span>
+    <span>За абеткою (за зростанням)</span>
   </button>
   <button mat-menu-item (click)="onSort({ titleDe: -1 })">
     <mat-icon>arrow_upward</mat-icon>
-    <span>По алфавиту (по убыванию)</span>
+    <span>За алфавітом (за спаданням)</span>
   </button>
   <button mat-menu-item (click)="onSort({ createdAt: -1 })">
     <mat-icon>schedule</mat-icon>
-    <span>По добавленнию (сначала самые последние)</span>
+    <span>За додаванням (спочатку останні)</span>
   </button>
   <button mat-menu-item (click)="onSort({ createdAt: 1 })">
     <mat-icon>history</mat-icon>
-    <span>По добавленнию (сначала самые первые)</span>
+    <span>За додаванням (спочатку найперші)</span>
   </button>
 </mat-menu>
 
@@ -60,7 +60,7 @@
 
 <div class="row second wrap">
   <app-search-input
-    placeholder="Поиск по немецкому названию"
+    placeholder="Пошук за німецькою назвою"
     [isLoading]="isLoading"
     [query]="searchDe"
     (searchChanged)="onSearchChanged($event, 'de')"
@@ -71,7 +71,7 @@
   </span>
 
   <app-search-input
-    placeholder="Поиск по русскому названию"
+    placeholder="Пошук за українською назвою"
     [isLoading]="isLoading"
     [query]="searchRu"
     (searchChanged)="onSearchChanged($event, 'ru')"
